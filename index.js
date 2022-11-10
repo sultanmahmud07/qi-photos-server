@@ -34,6 +34,15 @@ async function run(){
       });
 
 
+      // this is for home services 
+      app.get('/homeservices', async(req, res) =>{
+        const query ={}
+        const homeCursor = serviceCollection.find(query);
+        const homeServices = await homeCursor.limit(3).toArray();
+        res.send(homeServices);
+      });
+
+
       app.get('/services/:id', async(req, res) => {
         const id =req.params.id;
         const query = { _id: ObjectId(id)};
